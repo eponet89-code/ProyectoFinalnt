@@ -539,7 +539,7 @@ export default function CanvasView() {
 
     //fetch(`http://localhost:3000/projects/canvas/${encodeURIComponent(sheetName)}`)
     // Antes: fetch(`http://localhost:3000/projects/canvas/${...}`)
-    fetch(`https://backend-tablero.onrender.com/projects/canvas/${encodeURIComponent(sheetName)}`)
+    fetch(`https://proyectointer.onrender.com/projects/canvas/${encodeURIComponent(sheetName)}`)
       .then((r) => r.json())
       .then((d) => {
         const newRows = Array.isArray(d) ? d : Array.isArray(d?.rows) ? d.rows : [];
@@ -644,7 +644,7 @@ export default function CanvasView() {
     setAiError('');
     try {
       //const res = await fetch(`http://localhost:3000/ai/canvas-improve`,
-      const res = await fetch(`https://backend-tablero.onrender.com/ai/canvas-improve`, {
+      const res = await fetch(`https://proyectointer.onrender.com/ai/canvas-improve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ canvas }),
