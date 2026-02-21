@@ -1,0 +1,548 @@
+/* =========================
+   Design tokens (corporativo)
+   ========================= */
+:root{
+  --brand: #bc5490;
+  --brand-2: #db0080;
+  --ink: #0f172a;
+  --muted: rgba(15, 23, 42, .64);
+  --line: rgba(2, 6, 23, .10);
+  --bg: #f6f7fb;
+
+  --card: rgba(255,255,255,.82);
+  --card-solid: #ffffff;
+  --shadow: 0 16px 40px rgba(2, 6, 23, .10);
+  --shadow-2: 0 22px 60px rgba(2, 6, 23, .14);
+
+  --radius: 18px;
+  --radius-sm: 12px;
+}
+
+/* =========================
+   Shell / layout
+   ========================= */
+.pb-shell{
+  background: radial-gradient(1200px 500px at 30% -10%, rgba(225,0,152,.12), transparent 60%),
+              radial-gradient(900px 420px at 85% 0%, rgba(99,102,241,.10), transparent 55%),
+              var(--bg);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+/* Top area */
+.pb-top{
+  max-width: 1200px;
+  margin: 0 auto 16px auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.pb-filters{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 12px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(2,6,23,.08);
+  box-shadow: 0 10px 25px rgba(2,6,23,.06);
+  backdrop-filter: blur(10px);
+}
+
+.pb-field{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(2,6,23,.10);
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.pb-field:hover{
+  transform: translateY(-1px);
+  border-color: rgba(225,0,152,.30);
+}
+
+.pb-field:focus-within{
+  border-color: rgba(225,0,152,.55);
+  box-shadow: 0 0 0 4px rgba(225,0,152,.12);
+}
+
+.pb-ico{
+  font-size: 14px;
+  opacity: .9;
+}
+
+
+
+.pb-field input,
+.pb-field select{
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--ink);
+  min-width: 220px;
+}
+
+.pb-field select{
+  min-width: 160px;
+  appearance: none;
+}
+
+.pb-select{
+  padding-right: 14px;
+}
+
+.pb-clear{
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(2,6,23,.12);
+  background: rgba(255,255,255,.8);
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+
+.pb-clear:hover{
+  transform: translateY(-1px);
+  border-color: rgba(225,0,152,.45);
+  box-shadow: 0 12px 24px rgba(2,6,23,.08);
+}
+
+.pb-clear:disabled{
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Stats */
+.pb-stats{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(2,6,23,.08);
+  box-shadow: 0 10px 25px rgba(2,6,23,.06);
+  backdrop-filter: blur(10px);
+}
+
+.pb-stat{
+  display: grid;
+  line-height: 1.1;
+}
+
+.pb-stat-kpi{
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.pb-stat-label{
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.pb-divider{
+  width: 1px;
+  height: 28px;
+  background: rgba(2,6,23,.12);
+}
+
+/* =========================
+   Board / cards
+   ========================= */
+.board{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+/* Card base */
+.card{
+  position: relative;
+  isolation: isolate;
+
+  background: var(--card);
+  border: 1px solid rgba(2,6,23,.08);
+  border-radius: calc(var(--radius) + 2px);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  transform: translateY(10px);
+  opacity: 0;
+  animation: cardIn .55s ease forwards;
+  animation-delay: var(--delay, 0ms);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2);
+  border-color: rgba(225,0,152,.22);
+}
+
+.card-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Badge + pill */
+.pill{
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(225,0,152,0.10);
+  color: var(--brand);
+  font-weight: 800;
+  letter-spacing: .02em;
+  width: fit-content;
+}
+
+.badge{
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  border: 1px solid rgba(2,6,23,.10);
+  background: rgba(255,255,255,.70);
+  color: var(--ink);
+}
+
+.badge--done{
+  border-color: rgba(22,163,74,.25);
+  background: rgba(22,163,74,.10);
+  color: #166534;
+}
+
+.badge--active{
+  border-color: rgba(225,0,152,.25);
+  background: rgba(225,0,152,.10);
+  color: var(--brand);
+}
+
+.badge--pending{
+  border-color: rgba(100,116,139,.25);
+  background: rgba(100,116,139,.10);
+  color: rgba(15,23,42,.70);
+}
+
+/* Title */
+.card-title{
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.2;
+
+  /* truncado elegante */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Meta */
+.card-meta{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meta-item{
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.meta-text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+.meta-ico{
+  font-size: 14px;
+  opacity: .9;
+}
+
+/* Progress */
+.progress{
+  height: 10px;
+  background: rgba(2,6,23,.08);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(2,6,23,.06);
+}
+
+.progress-bar{
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+
+  /* animación de llenado (sin depender del width inline) */
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: barGrow .9s cubic-bezier(.2, .9, .2, 1) forwards;
+  animation-delay: calc(var(--delay, 0ms) + 160ms);
+}
+
+/* Variantes por status */
+.progress--done .progress-bar{
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.progress--active .progress-bar{
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+}
+
+.progress--pending .progress-bar{
+  background: linear-gradient(90deg, rgba(100,116,139,.65), rgba(148,163,184,.85));
+}
+
+/* Footer */
+.card-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.percent{
+  font-weight: 950;
+  font-size: 14px;
+  letter-spacing: .02em;
+}
+
+.percent--done{ color: #16a34a; }
+.percent--active{ color: var(--brand); }
+.percent--pending{ color: rgba(15,23,42,.55); }
+
+/* Button */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+
+  box-shadow: 0 14px 30px rgba(225,0,152,.22);
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 18px 40px rgba(225,0,152,.28);
+}
+
+.btn:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  background: rgba(100,116,139,.40);
+  box-shadow: none;
+}
+
+.btn-arrow{
+  font-weight: 900;
+}
+
+/* Soft glow decor */
+.card-glow{
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius) + 4px);
+  background: radial-gradient(600px 240px at 20% 0%, rgba(225,0,152,.16), transparent 55%),
+              radial-gradient(520px 220px at 90% 10%, rgba(99,102,241,.12), transparent 55%);
+  z-index: -1;
+  opacity: .0;
+  transition: opacity .2s ease;
+}
+
+.card:hover .card-glow{
+  opacity: 1;
+}
+
+/* =========================
+   Loading
+   ========================= */
+.pb-loading{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(2,6,23,.08);
+  box-shadow: 0 10px 25px rgba(2,6,23,.06);
+}
+
+.pb-spinner{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 3px solid rgba(2,6,23,.12);
+  border-top-color: var(--brand);
+  animation: spin 1s linear infinite;
+}
+
+.pb-loading-title{
+  margin: 0;
+  font-weight: 900;
+  color: var(--ink);
+}
+.pb-loading-sub{
+  margin: 2px 0 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* =========================
+   Empty state
+   ========================= */
+.pb-empty{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 26px 18px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(2,6,23,.08);
+  box-shadow: 0 10px 25px rgba(2,6,23,.06);
+  text-align: center;
+}
+
+.pb-empty-icon{
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.pb-empty h3{
+  margin: 0 0 6px 0;
+  color: var(--ink);
+  font-weight: 950;
+}
+
+.pb-empty p{
+  margin: 0 0 14px 0;
+  color: var(--muted);
+}
+
+.pb-empty-btn{
+  background: rgba(225,0,152,.10);
+  color: var(--brand);
+  border: 1px solid rgba(225,0,152,.25);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.pb-empty-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(2,6,23,.08);
+}
+
+/* =========================
+   Animations
+   ========================= */
+@keyframes cardIn{
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+@keyframes barGrow{
+  to{ transform: scaleX(1); }
+}
+
+@keyframes spin{
+  to{ transform: rotate(360deg); }
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 900px){
+  .pb-top{
+    grid-template-columns: 1fr;
+  }
+
+  .pb-field input,
+  .pb-field select{
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 520px){
+  .pb-shell{ padding: 14px; }
+
+  .pb-filters{
+    padding: 10px;
+  }
+
+  .pb-field{
+    width: 100%;
+  }
+
+  .pb-field input,
+  .pb-field select{
+    min-width: 0;
+    width: 100%;
+  }
+
+  .pb-clear{
+    width: 100%;
+  }
+
+  .board{
+    grid-template-columns: 1fr;
+  }
+
+  .meta-text{
+    max-width: 150px;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .card, .progress-bar, .pb-spinner{
+    animation: none !important;
+  }
+  .card{
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,43 @@
+/* Reset básico */
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: #f5f5f7;
+  color: #2e2e2e;
+}
+
+/* Header */
+.app-header {
+  background: white;
+  border-bottom: 3px solid #e10098;
+  padding: 20px 32px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand {
+  font-weight: 800;
+  color: #e10098;
+  font-size: 22px;
+}
+
+.divider {
+  width: 1px;
+  height: 28px;
+  background: #ddd;
+}
+
+.app-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Main */
+main {
+  padding: 24px;
+}
