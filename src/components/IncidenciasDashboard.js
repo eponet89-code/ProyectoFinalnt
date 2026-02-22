@@ -138,40 +138,40 @@ useEffect(() => {
             <h4 className="section-title">Análisis de Productividad: {categoriaActiva}</h4>
             <div className="responsive-chart">
               <ResponsiveContainer width="100%" height="100%">
-                {/* 1. Ajustamos el margin inferior (bottom) solo si es móvil para que no se corten las fechas inclinadas */}
+                {/* Usamos isMobile para el margen inferior */}
                 <BarChart 
                   data={chartData} 
                   margin={{ 
                     top: 10, 
                     right: 10, 
                     left: -20, 
-                    bottom: window.innerWidth < 768 ? 40 : 0 
+                    bottom: isMobile ? 40 : 0 
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
                   
-                  {/* 2. AQUÍ ESTÁ EL CAMBIO: El XAxis ahora es inteligente */}
+                  {/* AQUÍ USAMOS isMobile: Esto quita el error de Vercel */}
                   <XAxis 
                     dataKey="name" 
                     axisLine={false} 
                     tickLine={false} 
-                    interval={window.innerWidth < 768 ? 0 : "auto"} // Muestra todas en móvil
-                    angle={window.innerWidth < 768 ? -45 : 0}      // Inclina solo en móvil
-                    textAnchor={window.innerWidth < 768 ? "end" : "middle"}
-                    height={window.innerWidth < 768 ? 60 : 30}     // Da más aire abajo en móvil
+                    interval={isMobile ? 0 : "auto"} 
+                    angle={isMobile ? -45 : 0} 
+                    textAnchor={isMobile ? "end" : "middle"}
+                    height={isMobile ? 60 : 30}
                     tick={{fill: '#64748B', fontSize: 11}} 
                   />
 
                   <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748B', fontSize: 11}} />
                   <Tooltip cursor={{fill: '#F8FAFC'}} contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)'}} />
                   
-                  {/* 3. Opcional: Barras un poco más delgadas en móvil para que no se amontonen */}
+                  {/* También lo usamos aquí para el ancho de las barras */}
                   <Bar 
                     dataKey="Cerrado" 
                     stackId="a" 
                     fill="#10B981" 
                     radius={[4, 4, 0, 0]} 
-                    barSize={window.innerWidth < 768 ? 15 : 25} 
+                    barSize={isMobile ? 15 : 25} 
                   />
                   <Bar dataKey="Asignado" stackId="a" fill="#F59E0B" />
                   <Bar dataKey="En curso" stackId="a" fill="#E6007E" />
