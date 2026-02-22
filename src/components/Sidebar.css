@@ -100,3 +100,75 @@
   height: 24px;
   stroke-width: 1.8px;
 }
+
+
+/*AJUSTES PARA EL RESPONDIVE */
+
+/* Botón hamburguesa: oculto por defecto en PC */
+.hamburger-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 2000;
+  background: #db0080;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Etiquetas que solo se ven en móvil cuando se abre el sidebar */
+.sidebar-label-mobile {
+  display: none;
+}
+
+/* --- MÓVIL --- */
+@media (max-width: 768px) {
+  .hamburger-toggle {
+    display: block; /* Mostrar botón hamburguesa */
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -100%; /* Esconder fuera de pantalla */
+    top: 0;
+    height: 100vh;
+    width: 180px; /* Ancho mayor en móvil */
+    transition: left 0.3s ease;
+    z-index: 1500;
+    background: white;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar.is-open {
+    left: 0; /* Mostrar al abrir */
+  }
+
+  /* Mostrar nombres junto a los iconos en móvil */
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 90%;
+    justify-content: flex-start;
+    padding: 15px;
+  }
+
+  .sidebar-label-mobile {
+    display: inline;
+    font-weight: 500;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1400;
+  }
+}

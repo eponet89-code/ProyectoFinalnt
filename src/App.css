@@ -37,6 +37,52 @@ body {
   margin: 0;
 }
 
+/* ESTILOS PARA EL RESPONSVE DEL HEADER  */
+/* Contenedor para alinear logo y texto */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  flex-wrap: wrap; /* Esto hace que si no caben, el texto baje */
+  gap: 10px;
+}
+
+/* El Logo se ajusta en móviles */
+.header-logo {
+  height: 65px;
+  width: auto;
+}
+
+/* El Título se adapta al tamaño de la pantalla */
+.header-title {
+  margin: 0;
+  color: #db0080;
+  font-weight: 630;
+  font-size: clamp(1.2rem, 4vw, 2rem); /* El secreto: tamaño fluido */
+  text-align: right;
+}
+
+/* Ajustes específicos para Celulares */
+@media (max-width: 600px) {
+  .header-container {
+    justify-content: center; /* Centra todo en móvil */
+    text-align: center;
+  }
+  
+  .header-logo {
+    height: 45px; /* Más pequeño en celular */
+  }
+
+  .header-title {
+    text-align: center;
+    width: 100%;
+    font-size: 1.1rem;
+  }
+}
+/*-----------------------------------------*/
+
 /* Main */
 main {
   padding: 24px;
