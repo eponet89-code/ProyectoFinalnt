@@ -1,12 +1,13 @@
 /* ===========================
-   CONTENEDOR PRINCIPAL
+   CONTENEDOR PRINCIPAL del bueno
    =========================== */
 .progress-card {
-  background: #ffffff;
+   background: #ffffff;
   border-radius: 16px;
-  padding: 24px 28px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-  margin-bottom: 32px;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  width: 100%;;
 }
 
 /* ===========================
