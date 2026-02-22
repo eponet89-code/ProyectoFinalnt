@@ -140,12 +140,27 @@ body {
 
 /* --- LAYOUT PRINCIPAL (CORREGIDO) --- */
 .main-content-layout {
-    display: grid;
+    display: flex;
     /* Reducimos el ancho del sidebar para dar aire al contenido central */
     grid-template-columns: 1fr 300px; 
     gap: 25px;
+    flex-direction: row;
     align-items: start;
 }
+@media (max-width: 1024px) {
+  .main-content-layout {
+    flex-direction: column; /* En móvil/tablet todo va hacia abajo */
+  }
+  
+  .left-column, .right-column {
+    width: 100% !important; /* Ocupan todo el ancho */
+  }
+}
+
+
+
+
+
 
 /* --- SECCIONES --- */
 .chart-container-premium, .table-section-premium {
@@ -183,6 +198,7 @@ body {
     border-radius: 10px;
     display: flex;
     gap: 4px;
+    flex-wrap: wrap;
 }
 
 .modern-tab {
@@ -540,4 +556,17 @@ body {
   margin-top: 10px;
   font-size: 0.85rem;
   line-height: 1.4;
+}
+
+/*NUEVO RESPONSIVE*/
+
+/* 📱 Magia para móvil */
+@media (max-width: 768px) {
+  .main-content-layout {
+    flex-direction: column; /* Apila una columna sobre otra */
+  }
+  
+  .kpi-grid {
+    grid-template-columns: 1fr; /* Una tarjeta por fila */
+  }
 }
