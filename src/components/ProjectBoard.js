@@ -225,8 +225,7 @@ export default function ProjectBoard({ projects = [] }) {
                 style={{ "--delay": `${i * 55}ms` }}
               >
                 <div className="card-top">
-                  <span className="pill">Proyecto</span>
-
+                  <span className="pill"> Documentación del Proyecto</span>
                   <span className={`badge badge--${status}`}>
                     {pct >= 100
                       ? "Completado"
