@@ -67,11 +67,13 @@ export default function ProgressChart({ projects = [] }) {
     if (!Array.isArray(projects)) return [];
 
     return projects
-      .filter((p) => p.canvasLink && p.canvasLink.trim() !== '' && p.cumplimiento)
+      // 1. Quitamos la validación obligatoria de canvasLink para que aparezcan TODAS
+      .filter((p) => p.cumplimiento) 
       .map((p) => ({
         name: p.nombre,
         value: Number(String(p.cumplimiento).replace('%', '')) || 0,
-        canvas: p.canvasLink,
+        // Si no tiene link, guardamos null o vacío
+        canvas: p.canvasLink && p.canvasLink.trim() !== '' ? p.canvasLink : null,
       }))
       .filter((p) => {
         if (range === '10-29') return p.value >= 10 && p.value <= 29;
