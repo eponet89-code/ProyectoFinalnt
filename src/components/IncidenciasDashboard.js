@@ -128,7 +128,7 @@ useEffect(() => {
 
       <div className="kpi-grid">
         <KpiCard title="Total Registros" value={incidencias.length} icon="📊" variant="blue" />
-        <KpiCard title="Iniciativas Pendientes" value={incidencias.filter(i => ["asignado", "en curso", "pendiente"].includes(i.Estado?.toLowerCase())).length} icon="⏳" variant="pink" />
+        <KpiCard title="Incidencias Pendientes" value={incidencias.filter(i => ["asignado", "en curso", "pendiente"].includes(i.Estado?.toLowerCase())).length} icon="⏳" variant="pink" />
         <KpiCard title="Completadas" value={incidencias.filter(i => i.Estado?.toLowerCase() === "cerrado").length} icon="✅" variant="green" />
       </div>
 

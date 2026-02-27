@@ -401,11 +401,11 @@ body {
 }
 
 .badge-registro {
-    background: #F1F5F9;
-    color: var(--text-muted);
+    background: #db0080;
+    color: white;
     padding: 3px 12px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
 }
 
