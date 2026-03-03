@@ -22,6 +22,7 @@ export default function MainLayout({ projects, onLogout }) {
           {view === 'home' && <ProjectBoard projects={projects} />}
           {view === 'progress' && <ProgressChart projects={projects} />}
           {view === 'incidencias' && <IncidenciasDashboard />}
+           {view === 'puntos' && <PuntosDolor />}
         </main>
       </div>
     </div>
