@@ -5,6 +5,7 @@ import ProjectBoard from '../components/ProjectBoard';
 import ProgressChart from '../components/ProgressChart';
 import './MainLayout.css';
 import IncidenciasDashboard from '../components/IncidenciasDashboard';
+import PuntosDolor from '../components/PuntosDolor'; // Componente para los puntos de dolor
 
 // Agregamos onLogout a los props
 export default function MainLayout({ projects, onLogout }) {
