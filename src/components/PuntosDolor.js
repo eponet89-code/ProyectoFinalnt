@@ -27,11 +27,11 @@ export default function PuntosDolorDashboard() {
 
   const puntosAnalizados = useMemo(() => {
     const diccionario = [
-      { etiqueta: "Sistemas (SAP/ADCON)", keywords: ["SISTEMA", "RED", "CONEXION", "ADCON", "SAP", "INTERNET"], color: "#E6007E" },
+      { etiqueta: "Acceso a Sistemas y Red", keywords: ["SISTEMA", "RED", "CONEXION", "ADCON", "SAP", "INTERNET"], color: "#E6007E" },
       { etiqueta: "Procesos de Carga", keywords: ["CARGA", "ARCHIVO", "EXPORTADOR", "GENERACION"], color: "#7C3AED" },
       { etiqueta: "Infraestructura/Fallas", keywords: ["PERCANCE", "FALLA", "DAÑO", "MANTENIMIENTO", "ELEVADOR"], color: "#F59E0B" },
       { etiqueta: "Facturación Web", keywords: ["FACTURA", "COBRO", "PAGO", "CANCELACION"], color: "#3B82F6" },
-      { etiqueta: "Atención Clientes", keywords: ["QUEJA", "ATENCION", "SERVICIO", "CLIENTE"], color: "#10B981" }
+      { etiqueta: "Atención Clientes", keywords: ["DESBLOQUEO", "ATENCION", "SERVICIO", "CLIENTE"], color: "#10B981" }
     ];
 
     return diccionario.map(cat => {
@@ -96,7 +96,7 @@ export default function PuntosDolorDashboard() {
               <div className="card-left">
                 <h3 className="card-title">{item.etiqueta}</h3>
                 <div className="main-stat">
-                  <strong>{item.total}</strong> <small>Tickets Válidos</small>
+                  <strong>{item.total}</strong> <small>Incidentes contados</small>
                 </div>
 
                 <div className="stats-breakdown">
