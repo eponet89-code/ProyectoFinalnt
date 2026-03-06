@@ -1,23 +1,35 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { readXlsx } from "../modules/incidencias/utils/readXlsx";
+//import { readXlsx } from "../modules/incidencias/utils/readXlsx";
 import "./PuntosDolor.css";
 
 export default function PuntosDolorDashboard() {
   const [incidencias, setIncidencias] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     async function loadData() {
       try {
-        const [est, gal, inm] = await Promise.all([
-          readXlsx("/data/ESTACIONAMIENTOS.xlsx"),
-          readXlsx("/data/GALERIAS.xlsx"),
-          readXlsx("/data/INMOBILIARIA.xlsx")
-        ]);
-        setIncidencias([...est, ...gal, ...inm]);
+        // 1. El ID de tu hoja de Google Sheets de Incidencias
+        const SHEET_ID = "15FGxYrNDbrxlDm9tTtXb6JpS6lvJk-mW39qhSTrs7AQ"; // <--- ID DE LA HOJA DE
+
+        // 
+        // Usamos la URL de Render porque tu Front ya está configurado para buscarla ahí
+        const response = await fetch(
+          `https://proyectointer.onrender.com/projects/incidencias/dashboard?id=${SHEET_ID}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`Error en la API: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        // 3. Guardamos los datos. 
+        // Como el Back ya unió las 3 pestañas, 'data' ya es el array completo.
+        setIncidencias(data);
       } catch (error) {
-        console.error("Error al cargar datos:", error);
+        console.error("Error al cargar datos desde Google Sheets:", error);
       } finally {
         setLoading(false);
       }
@@ -27,11 +39,11 @@ export default function PuntosDolorDashboard() {
 
   const puntosAnalizados = useMemo(() => {
     const diccionario = [
-      { etiqueta: "Acceso a Sistemas y Red", keywords: ["SISTEMA", "RED", "CONEXION", "ADCON", "SAP", "INTERNET"], color: "#E6007E" },
+      { etiqueta: "Sistemas (SAP/ADCON)", keywords: ["SISTEMA", "RED", "CONEXION", "ADCON", "SAP", "INTERNET"], color: "#E6007E" },
       { etiqueta: "Procesos de Carga", keywords: ["CARGA", "ARCHIVO", "EXPORTADOR", "GENERACION"], color: "#7C3AED" },
       { etiqueta: "Infraestructura/Fallas", keywords: ["PERCANCE", "FALLA", "DAÑO", "MANTENIMIENTO", "ELEVADOR"], color: "#F59E0B" },
       { etiqueta: "Facturación Web", keywords: ["FACTURA", "COBRO", "PAGO", "CANCELACION"], color: "#3B82F6" },
-      { etiqueta: "Atención Clientes", keywords: ["DESBLOQUEO", "ATENCION", "SERVICIO", "CLIENTE"], color: "#10B981" }
+      { etiqueta: "Atención Clientes", keywords: ["QUEJA", "ATENCION", "SERVICIO", "CLIENTE"], color: "#10B981" }
     ];
 
     return diccionario.map(cat => {
@@ -43,7 +55,7 @@ export default function PuntosDolorDashboard() {
       );
 
       const total = baseValida.length;
-      
+      //la notificacion con cancelacion es exito 
       // 2. ÉXITO: Cerrados con notificación O Finalizados
       const exito = baseValida.filter(i => 
         (i.Estado?.toLowerCase() === "cerrado" && i["Motivo de estado"]?.toLowerCase().includes("notificación")) ||
@@ -96,7 +108,7 @@ export default function PuntosDolorDashboard() {
               <div className="card-left">
                 <h3 className="card-title">{item.etiqueta}</h3>
                 <div className="main-stat">
-                  <strong>{item.total}</strong> <small>Incidentes contados</small>
+                  <strong>{item.total}</strong> <small>Tickets Válidos</small>
                 </div>
 
                 <div className="stats-breakdown">
